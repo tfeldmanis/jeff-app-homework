@@ -10,7 +10,7 @@ java {
 }
 
 application {
-    mainClassName = "jeff.app.homework.console.App"
+    mainClassName = "jeff.app.homework.console.ConsoleApplication"
 }
 
 dependencies {
