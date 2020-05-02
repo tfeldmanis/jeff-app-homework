@@ -35,8 +35,7 @@ public class ConsoleChatExecutor {
 				printLine(chatAction.getText());
 				break;
 			case TEXT_INPUT:
-				Optional<ChatAction> chatErrorAction = chat.receiveInput(consoleIn.nextLine());
-				chatErrorAction.ifPresent(this::executeAction);
+				readLine();
 				break;
 			case TEXT_INPUT_WITH_GUIDE:
 				printLine(chatAction.getText());
@@ -54,7 +53,8 @@ public class ConsoleChatExecutor {
 	}
 
 	private void readLine() {
-		consoleIn.nextLine();
+		Optional<ChatAction> chatErrorAction = chat.receiveInput(consoleIn.nextLine());
+		chatErrorAction.ifPresent(this::executeAction);
 	}
 
 }

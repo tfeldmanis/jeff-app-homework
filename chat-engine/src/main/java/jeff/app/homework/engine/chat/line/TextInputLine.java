@@ -12,7 +12,7 @@ public class TextInputLine<T> extends ChatInputLine<T> {
 
 	@Override
 	public boolean isInputValid(String inputText) {
-		return true;
+		return !inputText.isBlank();
 	}
 
 	@Override
