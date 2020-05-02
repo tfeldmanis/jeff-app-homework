@@ -1,15 +1,23 @@
 package jeff.app.homework.engine.chat.line;
 
-public class DateInputLine extends ChatInputLine {
+import jeff.app.homework.engine.chat.action.ChatAction;
 
-	@Override
-	protected String getGuide() {
-		return null;
+import java.util.function.BiConsumer;
+
+public class DateInputLine<T> extends ChatInputLine<T> {
+
+	public DateInputLine(BiConsumer<T, String> domainObjectSetter, String errorMessage) {
+		super(domainObjectSetter, errorMessage);
 	}
 
 	@Override
-	protected boolean isInputValid(String inputText) {
-		return false;
+	public boolean isInputValid(String inputText) {
+		return true;
+	}
+
+	@Override
+	public ChatAction getChatAction(T domainObject) {
+		return ChatAction.textInputWithGuide("DD-MM-YYYY");
 	}
 	
 }

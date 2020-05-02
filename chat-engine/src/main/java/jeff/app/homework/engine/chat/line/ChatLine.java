@@ -1,4 +1,9 @@
 package jeff.app.homework.engine.chat.line;
 
-public interface ChatLine {
+import jeff.app.homework.engine.chat.action.ChatAction;
+
+public interface ChatLine<T> {
+
+	ChatAction getChatAction(T domainObject);
+
 }

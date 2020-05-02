@@ -1,22 +1,25 @@
 package jeff.app.homework.engine.chat.line;
 
-public abstract class ChatInputLine implements ChatLine {
+import java.util.function.BiConsumer;
 
-	private String inputText;
+public abstract class ChatInputLine<T> implements ChatLine<T> {
 
-	protected abstract String getGuide();
+	private BiConsumer<T, String> domainObjectSetter;
+	private String errorMessage;
 
-	protected abstract boolean isInputValid(String inputText);
-
-	public boolean isInputValid() {
-		return isInputValid(inputText);
+	public ChatInputLine(BiConsumer<T, String> domainObjectSetter, String errorMessage) {
+		this.domainObjectSetter = domainObjectSetter;
+		this.errorMessage = errorMessage;
 	}
 
-	public String getInputText() {
-		return inputText;
+	public abstract boolean isInputValid(String inputText);
+
+	public void processInput(T domainObject, String input) {
+		domainObjectSetter.accept(domainObject, input);
 	}
 
-	public void setInputText(String inputText) {
-		this.inputText = inputText;
+	public String getErrorMessage() {
+		return errorMessage;
 	}
+
 }
