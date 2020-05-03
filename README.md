@@ -34,7 +34,7 @@ to see it in action. View its source to see an example of how to build your own 
 
 I'm a strong proponent of the quote _"The more your tests resemble the way your software
 is used, the more confidence they can give you. © Kent C. Dodds"_, hence you won't find
-a separate unit tests for each of the classes present in the project. Instead, I'm using
+separate unit tests for each of the classes present in the project. Instead, I'm using
 unit tests that run at integration test abstraction level.
 
 As I understand that it could be a contraversial subject in some companies, I'm totally
