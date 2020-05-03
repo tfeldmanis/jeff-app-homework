@@ -1,6 +1,6 @@
 # Jeff App Home Assignment Implementation
 
-This project contains two gradle sub-projects:
+This Gradle project contains two sub-projects:
 chat-engine and console-application
 
 ## Chat Engine

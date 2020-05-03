@@ -9,6 +9,7 @@ import jeff.app.homework.engine.chat.line.TextInputLine;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -23,6 +24,10 @@ public class ChatTests {
 				.addInputLine(new EmailInputLine<>(TestingPojo::setEmail, ""))
 				.addInputLine(new DateInputLine<>(TestingPojo::setDate, ""))
 				.addInputLine(new SingleChoiceInputLine<>(List.of("Home","Car"), TestingPojo::setSingleChoice, ""))
+				.addOutputLine("%s", TestingPojo::getText)
+				.addOutputLine("%s", TestingPojo::getEmail)
+				.addOutputLine("%s", tp -> tp.getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")))
+				.addOutputLine("%s", TestingPojo::getSingleChoice)
 				.build();
 
 		TestingPojo testingPojo = new TestingPojo();
@@ -40,6 +45,11 @@ public class ChatTests {
 
 		assertAction(chat.getNextAction(), ChatActionType.SINGLE_CHOICE_INPUT, List.of("Home","Car"));
 		chat.receiveInput("Car");
+
+		assertAction(chat.getNextAction(), ChatActionType.TEXT_OUTPUT, "Jon Doe");
+		assertAction(chat.getNextAction(), ChatActionType.TEXT_OUTPUT, "test@mailinator.com");
+		assertAction(chat.getNextAction(), ChatActionType.TEXT_OUTPUT, "30-01-1990");
+		assertAction(chat.getNextAction(), ChatActionType.TEXT_OUTPUT, "Car");
 
 		assertAction(chat.getNextAction(), ChatActionType.FINISH);
 
