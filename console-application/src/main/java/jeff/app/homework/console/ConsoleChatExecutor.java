@@ -10,6 +10,9 @@ import java.util.Scanner;
 
 public class ConsoleChatExecutor {
 
+	private static final String OUTPUT_PREFIX = "🤖: ";
+	private static final String INPUT_PREFIX = "👧: ";
+
 	private final PrintStream consoleOut;
 	private final Scanner consoleIn;
 	private final Chat<?> chat;
@@ -49,10 +52,11 @@ public class ConsoleChatExecutor {
 	}
 
 	private void printLine(String text) {
-		consoleOut.println(text);
+		consoleOut.println(OUTPUT_PREFIX + text);
 	}
 
 	private void readLine() {
+		consoleOut.print(INPUT_PREFIX);
 		Optional<ChatAction> chatErrorAction = chat.receiveInput(consoleIn.nextLine());
 		chatErrorAction.ifPresent(this::executeAction);
 	}
