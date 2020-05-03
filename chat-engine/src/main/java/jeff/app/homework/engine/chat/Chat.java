@@ -19,12 +19,13 @@ public class Chat<T> {
 	}
 
 	public ChatAction getNextAction() {
-		if (nextLine >= pattern.lineCount()) {
-			return ChatAction.finish();
-		}
 
 		if (waitingForInput) {
 			return pattern.getLine(nextLine - 1).getChatAction(domainObject);
+		}
+
+		if (nextLine >= pattern.lineCount()) {
+			return ChatAction.finish();
 		}
 
 		ChatLine<T> nextLine = pattern.getLine(this.nextLine++);

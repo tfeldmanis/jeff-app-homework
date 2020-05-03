@@ -28,9 +28,9 @@ public class ChatAction {
 		return new ChatAction(ChatActionType.FINISH, null, null);
 	}
 
-	private ChatActionType chatActionType;
-	private String text;
-	private List<String> options;
+	private final ChatActionType chatActionType;
+	private final String text;
+	private final List<String> options;
 
 	private ChatAction(ChatActionType chatActionType, String text, List<String> options) {
 		this.chatActionType = chatActionType;
