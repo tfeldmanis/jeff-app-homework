@@ -13,7 +13,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ChatTest {
+public class ChatTests {
 
 	@Test
 	void positiveFlowWithAllInputTypes() {
@@ -43,10 +43,10 @@ public class ChatTest {
 
 		assertAction(chat.getNextAction(), ChatActionType.FINISH);
 
-		assertEquals(testingPojo.getText(), "Jon Doe");
-		assertEquals(testingPojo.getEmail(), "test@mailinator.com");
-		assertEquals(testingPojo.getDate(), LocalDate.of(1990, 1, 30));
-		assertEquals(testingPojo.getSingleChoice(), "Car");
+		assertEquals("Jon Doe", testingPojo.getText());
+		assertEquals("test@mailinator.com", testingPojo.getEmail());
+		assertEquals(LocalDate.of(1990, 1, 30), testingPojo.getDate());
+		assertEquals("Car", testingPojo.getSingleChoice());
 	}
 
 	@Test
@@ -66,7 +66,7 @@ public class ChatTest {
 
 		assertAction(chat.getNextAction(), ChatActionType.FINISH);
 
-		assertEquals(testingPojo.getText(), "Jon Doe");
+		assertEquals("Jon Doe", testingPojo.getText());
 	}
 
 	@Test

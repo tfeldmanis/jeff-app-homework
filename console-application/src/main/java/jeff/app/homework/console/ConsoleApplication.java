@@ -13,32 +13,38 @@ import java.util.List;
 public class ConsoleApplication {
 
     public static void main(String[] args) {
+        run(new ConsoleChatExecutor());
+    }
+
+    static LoanApplication run(ConsoleChatExecutor consoleChatExecutor) {
         ChatPattern<LoanApplication> chatPattern = new ChatPatternBuilder<LoanApplication>()
 
-            .addOutputLine("Hi there, I'm Jeff 👋")
-            .addOutputLine("Your new best friend for finding great loan offers!")
-            .addOutputLine("First things first - let's get your account set up 🛠️")
-            .addOutputLine("What is your first name?")
-            .addInputLine(new TextInputLine<>(LoanApplication::setFirstName, "First name cannot be blank"))
-            .addOutputLine("And what is your last name?")
-            .addInputLine(new TextInputLine<>(LoanApplication::setLastName, "Last name cannot be blank"))
-            .addOutputLine("Nice to meet you, %s %s!", LoanApplication::getFirstName, LoanApplication::getLastName)
+                .addOutputLine("Hi there, I'm Jeff 👋")
+                .addOutputLine("Your new best friend for finding great loan offers!")
+                .addOutputLine("First things first - let's get your account set up 🛠️")
+                .addOutputLine("What is your first name?")
+                .addInputLine(new TextInputLine<>(LoanApplication::setFirstName, "First name cannot be blank"))
+                .addOutputLine("And what is your last name?")
+                .addInputLine(new TextInputLine<>(LoanApplication::setLastName, "Last name cannot be blank"))
+                .addOutputLine("Nice to meet you, %s %s!", LoanApplication::getFirstName, LoanApplication::getLastName)
 
-            .addOutputLine("%s, what's your email address?", LoanApplication::getFirstName)
-            .addInputLine(new EmailInputLine<>(LoanApplication::setEmail, "Please enter correct email"))
-            .addOutputLine("Fantastic. We are 70%% done with the setup!")
-            .addOutputLine("Your age is another important value for finding the best offers. Please enter your date of birth 📅")
-            .addInputLine(new DateInputLine<>(LoanApplication::setDateOfBirth, "The date is not valid"))
+                .addOutputLine("%s, what's your email address?", LoanApplication::getFirstName)
+                .addInputLine(new EmailInputLine<>(LoanApplication::setEmail, "Please enter correct email"))
+                .addOutputLine("Fantastic. We are 70%% done with the setup!")
+                .addOutputLine("Your age is another important value for finding the best offers. Please enter your date of birth 📅")
+                .addInputLine(new DateInputLine<>(LoanApplication::setDateOfBirth, "The date is not valid"))
 
-            .addOutputLine("And what do you need the money for?")
-            .addInputLine(new SingleChoiceInputLine<>(List.of("Home","Car","Holidays","Big Event"), LoanApplication::setLoanPurpose, "Please enter one of the provided values"))
-            .addOutputLine("Nice, I already have some options for you")
+                .addOutputLine("And what do you need the money for?")
+                .addInputLine(new SingleChoiceInputLine<>(List.of("Home", "Car", "Holidays", "Big Event"), LoanApplication::setLoanPurpose, "Please enter one of the provided values"))
+                .addOutputLine("Nice, I already have some options for you")
 
-            .build();
+                .build();
 
-        Chat<LoanApplication> chat = chatPattern.newChat(new LoanApplication());
+        LoanApplication loanApplication = new LoanApplication();
+        Chat<LoanApplication> chat = chatPattern.newChat(loanApplication);
+        consoleChatExecutor.run(chat);
 
-        new ConsoleChatExecutor(chat).run();
+        return loanApplication;
     }
 
 }

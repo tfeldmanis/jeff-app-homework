@@ -15,15 +15,21 @@ public class ConsoleChatExecutor {
 
 	private final PrintStream consoleOut;
 	private final Scanner consoleIn;
-	private final Chat<?> chat;
+	private Chat<?> chat;
 
-	public ConsoleChatExecutor(Chat<?> chat) {
-		this.consoleOut = System.out;
-		this.consoleIn = new Scanner(System.in);
-		this.chat = chat;
+
+	ConsoleChatExecutor(PrintStream consoleOut, Scanner consoleIn) {
+		this.consoleOut = consoleOut;
+		this.consoleIn = consoleIn;
 	}
 
-	public void run() {
+	public ConsoleChatExecutor() {
+		this.consoleOut = System.out;
+		this.consoleIn = new Scanner(System.in);
+	}
+
+	public void run(Chat<?> chat) {
+		this.chat = chat;
 		ChatAction curChatAction = chat.getNextAction();
 		while (curChatAction.getChatActionType() != ChatActionType.FINISH) {
 			executeAction(curChatAction);
