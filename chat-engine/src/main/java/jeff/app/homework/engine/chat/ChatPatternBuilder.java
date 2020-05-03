@@ -20,7 +20,7 @@ public class ChatPatternBuilder<T> {
 		return this;
 	}
 
-	public ChatPatternBuilder<T> addInputLine(ChatInputLine<T> line) {
+	public ChatPatternBuilder<T> addInputLine(ChatInputLine<T, ?> line) {
 		pattern.addLine(line);
 		return this;
 	}

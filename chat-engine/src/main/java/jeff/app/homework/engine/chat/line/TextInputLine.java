@@ -4,7 +4,7 @@ import jeff.app.homework.engine.chat.action.ChatAction;
 
 import java.util.function.BiConsumer;
 
-public class TextInputLine<T> extends ChatInputLine<T> {
+public class TextInputLine<T> extends ChatInputLine<T, String> {
 
 	public TextInputLine(BiConsumer<T, String> domainObjectSetter, String errorMessage) {
 		super(domainObjectSetter, errorMessage);
@@ -13,6 +13,11 @@ public class TextInputLine<T> extends ChatInputLine<T> {
 	@Override
 	public boolean isInputValid(String inputText) {
 		return !inputText.isBlank();
+	}
+
+	@Override
+	public String parseInput(String inputText) {
+		return inputText;
 	}
 
 	@Override

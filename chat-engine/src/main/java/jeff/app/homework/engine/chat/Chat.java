@@ -35,18 +35,18 @@ public class Chat<T> {
 		return nextLine.getChatAction(domainObject);
 	}
 
-	public Optional<ChatAction> receiveInput(String input) {
+	public <I> Optional<ChatAction> receiveInput(String input) {
 
 		if (!waitingForInput) {
 			throw new IllegalStateException("Chat not waiting for input");
 		}
 
-		ChatInputLine<T> curInputLine = (ChatInputLine<T>) pattern.getLine(nextLine - 1);
+		ChatInputLine<T, I> curInputLine = (ChatInputLine<T, I>) pattern.getLine(nextLine - 1);
 		if (!curInputLine.isInputValid(input)) {
 			return Optional.of(ChatAction.errorOutput(curInputLine.getErrorMessage()));
 		}
 
-		curInputLine.processInput(domainObject, input);
+		curInputLine.processInput(domainObject, curInputLine.parseInput(input));
 		waitingForInput = false;
 		return Optional.empty();
 	}

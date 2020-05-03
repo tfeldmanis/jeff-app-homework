@@ -5,7 +5,7 @@ import jeff.app.homework.engine.chat.action.ChatAction;
 import java.util.function.BiConsumer;
 import java.util.regex.Pattern;
 
-public class EmailInputLine<T> extends ChatInputLine<T> {
+public class EmailInputLine<T> extends ChatInputLine<T, String> {
 
 	// This regex is brutally simple, but fits for our purpose well
 	private Pattern emailRegex = Pattern.compile("^.+@.+\\..+$");
@@ -20,7 +20,13 @@ public class EmailInputLine<T> extends ChatInputLine<T> {
 	}
 
 	@Override
+	public String parseInput(String inputText) {
+		return inputText;
+	}
+
+	@Override
 	public ChatAction getChatAction(T domainObject) {
 		return ChatAction.textInput();
 	}
+
 }

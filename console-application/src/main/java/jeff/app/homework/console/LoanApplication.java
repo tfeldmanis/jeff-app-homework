@@ -1,12 +1,13 @@
 package jeff.app.homework.console;
 
+import java.time.LocalDate;
+
 public class LoanApplication {
 
 	private String firstName;
 	private String lastName;
 	private String email;
-	// TODO make this a date
-	private String dateOfBirth;
+	private LocalDate dateOfBirth;
 	private String loanPurpose;
 
 	public String getFirstName() {
@@ -33,11 +34,11 @@ public class LoanApplication {
 		this.email = email;
 	}
 
-	public String getDateOfBirth() {
+	public LocalDate getDateOfBirth() {
 		return dateOfBirth;
 	}
 
-	public void setDateOfBirth(String dateOfBirth) {
+	public void setDateOfBirth(LocalDate dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 

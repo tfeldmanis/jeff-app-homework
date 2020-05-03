@@ -5,7 +5,7 @@ import jeff.app.homework.engine.chat.action.ChatAction;
 import java.util.*;
 import java.util.function.BiConsumer;
 
-public class SingleChoiceInputLine<T> extends ChatInputLine<T> {
+public class SingleChoiceInputLine<T> extends ChatInputLine<T, String> {
 
 	private final Set<String> options;
 
@@ -17,6 +17,11 @@ public class SingleChoiceInputLine<T> extends ChatInputLine<T> {
 	@Override
 	public boolean isInputValid(String inputText) {
 		return options.contains(inputText);
+	}
+
+	@Override
+	public String parseInput(String inputText) {
+		return inputText;
 	}
 
 	@Override
